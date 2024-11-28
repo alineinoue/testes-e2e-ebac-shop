@@ -1,0 +1,26 @@
+[
+    {
+        "nomeProduto": "Ariel Roll Sleeve Sweatshirt",
+        "tamanho": "S", 
+        "cor": "Green",
+        "quantidade": 1
+    },
+    {
+        "nomeProduto": "Selene Yoga Hoodie",
+        "tamanho": "M", 
+        "cor": "White",
+        "quantidade": 2
+    },
+    {
+        "nomeProduto": "Autumn Pullie",
+        "tamanho": "L", 
+        "cor": "Red",
+        "quantidade": 3
+    },
+    {
+        "nomeProduto": "Cassia Funnel Sweatshirt",
+        "tamanho": "M", 
+        "cor": "White",
+        "quantidade": 1
+    }
+]

@@ -1,4 +1,9 @@
-/// <reference types="cypress" />
+/// <reference types="cypress"/>
+import { faker } from '@faker-js/faker';
+
+import checkoutPage from "../support/page_objects/checkout.page.js";
+import loginPage from "../support/page_objects/login.page.js";
+import produtosPage from "../support/page_objects/produtos.page.js"
 
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     /*  Como cliente 
@@ -10,11 +15,36 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         E validando minha compra ao final */
 
     beforeEach(() => {
-        cy.visit('/')
+        loginPage.visitarUrlLogin()
+        loginPage.inserirLogin()
+        produtosPage.limparCarrinho()
     });
 
     it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
-        //TODO 
+        //Fluxo de Adicionar produto ao carrinho
+        cy.fixture('produtos').then(produtos => {
+            produtos.forEach(produto => {
+                produtosPage.buscarProduto(produto.nomeProduto);
+                produtosPage.addProdutoCarrinho(
+                    produto.tamanho, 
+                    produto.cor, 
+                    produto.quantidade
+                );
+            });
+        });        
+
+        //Fluxo Checkout
+        produtosPage.acessarCarrinho()
+        checkoutPage.preencherOpcoes(
+            faker.address.streetAddress(),
+            faker.address.cityName(),
+            '72509-506',
+            '(84) 8539-5427'       
+        );
+
+        //Validar pedido finalizado
+        checkoutPage.finalizarCompra()
+        checkoutPage.pedidoFinalizado()
     });
 
 
